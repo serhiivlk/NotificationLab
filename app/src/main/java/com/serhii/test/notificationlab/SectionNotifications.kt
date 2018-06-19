@@ -2,6 +2,7 @@ package com.serhii.test.notificationlab
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
 import android.support.v4.app.NotificationCompat
@@ -24,11 +25,15 @@ class SectionNotifications(private val context: Context) {
     }
 
     fun createNotificationFromSection(sectionNumber: Int) {
+        val intent = context.mainIntentFromSection(sectionNumber)
+        val pendingIntent = PendingIntent.getActivity(context, sectionNumber, intent, 0)
+
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(context.getString(R.string.notification_text, sectionNumber))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
 
         val notificationId = counter.incrementAndGet()
