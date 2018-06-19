@@ -33,6 +33,9 @@ class SectionFragment : Fragment() {
 
         rootView.add_button.setOnClickListener { listener.addSection() }
         rootView.remove_button.setOnClickListener { listener.removeSection(sectionNumber) }
+        rootView.create_notification.setOnClickListener {
+            listener.createNotification(sectionNumber)
+        }
 
         return rootView
     }
@@ -40,6 +43,7 @@ class SectionFragment : Fragment() {
     interface OnSectionInteractionListener {
         fun addSection()
         fun removeSection(number: Int)
+        fun createNotification(number: Int)
     }
 
     companion object {

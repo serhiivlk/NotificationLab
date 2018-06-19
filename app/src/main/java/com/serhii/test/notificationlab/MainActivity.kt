@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
 
     private val scrollTime by lazy { resources.getInteger(android.R.integer.config_shortAnimTime) }
 
+    private val sectionNotifications by lazy { SectionNotifications(applicationContext) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,5 +38,9 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
             sectionsPagerAdapter.removeSectionsAfterPosition(number - 1)
             sectionsPagerAdapter.notifyDataSetChanged()
         }, scrollTime.toLong())
+    }
+
+    override fun createNotification(number: Int) {
+        sectionNotifications.createNotificationFromSection(number)
     }
 }
