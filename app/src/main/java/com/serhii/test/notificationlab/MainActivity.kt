@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
     override fun addSection() {
         sectionsPagerAdapter.addSection()
         sectionsPagerAdapter.notifyDataSetChanged()
+
+        val count = sectionsPagerAdapter.count
+        container.setCurrentItem(count - 1, true)
     }
 
     override fun removeSection() {
