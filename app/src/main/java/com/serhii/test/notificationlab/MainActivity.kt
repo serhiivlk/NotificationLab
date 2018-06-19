@@ -19,6 +19,11 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
         container.adapter = sectionsPagerAdapter
     }
 
+    override fun onDestroy() {
+        sectionNotifications.cancelAllNotifications()
+        super.onDestroy()
+    }
+
     override fun addSection() {
         sectionsPagerAdapter.addSection()
         sectionsPagerAdapter.notifyDataSetChanged()
@@ -33,6 +38,9 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
         if (number in 2..count + 1) {
             container.setCurrentItem(number - 2, true)
         }
+
+        sectionNotifications.cancelNotificationFromSection(number)
+
         // remove section after scrolling
         container.postDelayed({
             sectionsPagerAdapter.removeSectionsAfterPosition(number - 1)
