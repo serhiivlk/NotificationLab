@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
 
     private val scrollTime by lazy { resources.getInteger(android.R.integer.config_shortAnimTime) }
 
-    private val sectionNotifications by lazy { SectionNotifications(applicationContext) }
+    private val sectionNotifications by lazy {
+        SectionNotifications.getInstance(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,11 +8,12 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import android.util.ArrayMap
+import com.serhii.test.notificationstest.util.SingletonHolder
 import java.util.concurrent.atomic.AtomicInteger
 
 private const val CHANNEL_ID = "some_channel_id"
 
-class SectionNotifications(private val context: Context) {
+class SectionNotifications private constructor(private val context: Context) {
     private val counter = AtomicInteger()
 
     // map section to notifications
@@ -68,4 +69,8 @@ class SectionNotifications(private val context: Context) {
             notificationManager?.createNotificationChannel(channel)
         }
     }
+
+    companion object : SingletonHolder<SectionNotifications, Context>({
+        SectionNotifications(it)
+    })
 }
