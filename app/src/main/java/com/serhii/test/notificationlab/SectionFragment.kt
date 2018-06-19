@@ -32,14 +32,14 @@ class SectionFragment : Fragment() {
         }
 
         rootView.add_button.setOnClickListener { listener.addSection() }
-        rootView.remove_button.setOnClickListener { listener.removeSection() }
+        rootView.remove_button.setOnClickListener { listener.removeSection(sectionNumber) }
 
         return rootView
     }
 
     interface OnSectionInteractionListener {
         fun addSection()
-        fun removeSection()
+        fun removeSection(number: Int)
     }
 
     companion object {

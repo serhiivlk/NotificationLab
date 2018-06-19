@@ -8,6 +8,8 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
 
     private val sectionsPagerAdapter by lazy { SectionsPagerAdapter(supportFragmentManager) }
 
+    private val scrollTime by lazy { resources.getInteger(android.R.integer.config_shortAnimTime) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +25,16 @@ class MainActivity : AppCompatActivity(), SectionFragment.OnSectionInteractionLi
         container.setCurrentItem(count - 1, true)
     }
 
-    override fun removeSection() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun removeSection(number: Int) {
+        // scroll to previous section
+        val count = sectionsPagerAdapter.count
+        if (number in 2..count + 1) {
+            container.setCurrentItem(number - 2, true)
+        }
+        // remove section after scrolling
+        container.postDelayed({
+            sectionsPagerAdapter.removeSectionsAfterPosition(number - 1)
+            sectionsPagerAdapter.notifyDataSetChanged()
+        }, scrollTime.toLong())
     }
 }
